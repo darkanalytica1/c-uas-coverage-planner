@@ -1,0 +1,92 @@
+{
+  "name": "Example site: layered coverage",
+  "width_m": 1600,
+  "height_m": 1200,
+  "resolution_m": 15.0,
+  "sensors": [
+    {
+      "name": "RAD-1",
+      "x": 800,
+      "y": 600,
+      "range_m": 650,
+      "kind": "radar",
+      "fov_center_deg": 0.0,
+      "fov_width_deg": 360.0,
+      "min_range_m": 0.0
+    },
+    {
+      "name": "RF-N",
+      "x": 400,
+      "y": 1000,
+      "range_m": 500,
+      "kind": "rf",
+      "fov_center_deg": 45,
+      "fov_width_deg": 140,
+      "min_range_m": 0.0
+    },
+    {
+      "name": "RF-S",
+      "x": 1200,
+      "y": 250,
+      "range_m": 500,
+      "kind": "rf",
+      "fov_center_deg": 250,
+      "fov_width_deg": 140,
+      "min_range_m": 0.0
+    },
+    {
+      "name": "EO-E",
+      "x": 1450,
+      "y": 650,
+      "range_m": 420,
+      "kind": "eo",
+      "fov_center_deg": 270,
+      "fov_width_deg": 90,
+      "min_range_m": 0.0
+    }
+  ],
+  "obstacles": [
+    {
+      "name": "hangar",
+      "vertices": [
+        [
+          650,
+          700
+        ],
+        [
+          950,
+          700
+        ],
+        [
+          950,
+          900
+        ],
+        [
+          650,
+          900
+        ]
+      ]
+    },
+    {
+      "name": "tower",
+      "vertices": [
+        [
+          300,
+          400
+        ],
+        [
+          380,
+          400
+        ],
+        [
+          380,
+          480
+        ],
+        [
+          300,
+          480
+        ]
+      ]
+    }
+  ]
+}
