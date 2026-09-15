@@ -2,7 +2,7 @@
   <title id="t">Layered coverage and dead zones</title>
   <desc id="d">Schematic site. An omnidirectional radar and two sector sensors are added one at a time. Overlaps darken; a building casts a line-of-sight shadow; hatched areas are dead zones that no sensor sees.</desc>
   <style>
-    .serif { font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif; }
+    .display { font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; letter-spacing: -0.01em; }
     .sans  { font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
     .mono  { font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
     .s1 { animation: k1 10s ease-in-out infinite; }
@@ -15,8 +15,8 @@
   </style>
   <defs>
     <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-      <rect width="8" height="8" fill="#F6E9E6"/>
-      <line x1="0" y1="0" x2="0" y2="8" stroke="#A33A2B" stroke-width="1.5" stroke-opacity=".45"/>
+      <rect width="8" height="8" fill="#F4EFE2"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#8A6A1F" stroke-width="1.5" stroke-opacity=".45"/>
     </pattern>
     <clipPath id="map"><rect x="48" y="120" width="740" height="380"/></clipPath>
     <path id="shadow1" d="M400,220 L441.9,172 A170,170 0 0,1 491.3,246.3 L450,260 L450,220 Z"/>
@@ -28,72 +28,72 @@
     </mask>
   </defs>
 
-  <rect width="1200" height="540" fill="#F6F4EF"/>
-  <text x="48" y="52" class="mono" font-size="12" letter-spacing="1.2" fill="#7A8088">FIG. 2  ·  SCHEMATIC SITE, SENSORS ADDED ONE AT A TIME</text>
-  <text x="48" y="94" class="serif" font-size="26" font-weight="600" fill="#1B1F24">Rings overlap, but shadows and gaps remain</text>
+  <rect width="1200" height="540" fill="#F5F7FA"/>
+  <text x="48" y="52" class="mono" font-size="12" letter-spacing="1.2" fill="#6B7688">FIG. 2  ·  SCHEMATIC SITE, SENSORS ADDED ONE AT A TIME</text>
+  <text x="48" y="94" class="display" font-size="26" font-weight="600" fill="#0E1726">Rings overlap, but shadows and gaps remain</text>
 
   <g clip-path="url(#map)">
     <rect x="48" y="120" width="740" height="380" fill="url(#hatch)"/>
     <!-- opaque cover: removes hatch where any sensor sees -->
-    <g fill="#FBFAF7">
+    <g fill="#FFFFFF">
       <rect class="s1" x="0" y="0" width="1200" height="540" mask="url(#los1)"/>
       <use class="s2" href="#sec2"/>
       <use class="s3" href="#sec3"/>
     </g>
     <!-- tints: overlaps darken -->
-    <g fill="#1F3A5F" fill-opacity=".15">
+    <g fill="#0B2545" fill-opacity=".15">
       <rect class="s1" x="0" y="0" width="1200" height="540" mask="url(#los1)"/>
       <use class="s2" href="#sec2"/>
       <use class="s3" href="#sec3"/>
     </g>
-    <g fill="none" stroke="#5B7083" stroke-width="1.5">
+    <g fill="none" stroke="#3E5C76" stroke-width="1.5">
       <circle class="s1" cx="330" cy="300" r="170"/>
       <use class="s2" href="#sec2"/>
       <use class="s3" href="#sec3"/>
     </g>
-    <use href="#shadow1" fill="none" stroke="#A33A2B" stroke-width="1.25" stroke-dasharray="3 3" class="s1"/>
-    <rect x="400" y="220" width="50" height="40" rx="2" fill="#4A5058"/>
+    <use href="#shadow1" fill="none" stroke="#8A6A1F" stroke-width="1.25" stroke-dasharray="3 3" class="s1"/>
+    <rect x="400" y="220" width="50" height="40" rx="2" fill="#3D4A5C"/>
   </g>
-  <rect x="48.5" y="120.5" width="739" height="379" fill="none" stroke="#DAD6CC"/>
+  <rect x="48.5" y="120.5" width="739" height="379" fill="none" stroke="#D8DEE6"/>
 
   <!-- sensors -->
   <g class="mono" font-size="12">
-    <circle cx="330" cy="300" r="5.5" fill="#1F3A5F" stroke="#fff" stroke-width="1.5"/>
-    <text x="340" y="322" fill="#1F3A5F">S1 RADAR</text>
-    <circle cx="620" cy="200" r="5.5" fill="#1F3A5F" stroke="#fff" stroke-width="1.5"/>
-    <text x="630" y="192" fill="#1F3A5F">S2 RF</text>
-    <circle cx="760" cy="420" r="5.5" fill="#1F3A5F" stroke="#fff" stroke-width="1.5"/>
-    <text x="700" y="446" fill="#1F3A5F">S3 EO</text>
-    <text x="396" y="212" fill="#1B1F24">BUILDING</text>
-    <text x="72" y="150" fill="#A33A2B">DEAD ZONE</text>
+    <circle cx="330" cy="300" r="5.5" fill="#0B2545" stroke="#fff" stroke-width="1.5"/>
+    <text x="340" y="322" fill="#0B2545">S1 RADAR</text>
+    <circle cx="620" cy="200" r="5.5" fill="#0B2545" stroke="#fff" stroke-width="1.5"/>
+    <text x="630" y="192" fill="#0B2545">S2 RF</text>
+    <circle cx="760" cy="420" r="5.5" fill="#0B2545" stroke="#fff" stroke-width="1.5"/>
+    <text x="700" y="446" fill="#0B2545">S3 EO</text>
+    <text x="396" y="212" fill="#0E1726">BUILDING</text>
+    <text x="72" y="150" fill="#8A6A1F">DEAD ZONE</text>
   </g>
   <g transform="translate(756,150)">
-    <line x1="0" y1="18" x2="0" y2="0" stroke="#1B1F24" stroke-width="1.5"/>
-    <path d="M-4,6 L0,-2 L4,6" fill="none" stroke="#1B1F24" stroke-width="1.5"/>
-    <text x="-4" y="34" class="mono" font-size="12" fill="#1B1F24">N</text>
+    <line x1="0" y1="18" x2="0" y2="0" stroke="#0E1726" stroke-width="1.5"/>
+    <path d="M-4,6 L0,-2 L4,6" fill="none" stroke="#0E1726" stroke-width="1.5"/>
+    <text x="-4" y="34" class="mono" font-size="12" fill="#0E1726">N</text>
   </g>
 
   <!-- legend -->
   <g transform="translate(836,120)">
-    <rect width="316" height="380" rx="6" fill="#fff" stroke="#DAD6CC"/>
-    <rect width="316" height="3" fill="#1F3A5F"/>
-    <text x="24" y="38" class="mono" font-size="12" letter-spacing="1" fill="#7A8088">COVERAGE COUNT</text>
-    <rect x="24" y="58" width="28" height="20" fill="url(#hatch)" stroke="#A33A2B" stroke-opacity=".5"/>
-    <text x="66" y="73" class="sans" font-size="15" fill="#1B1F24">0, dead zone</text>
-    <rect x="24" y="92" width="28" height="20" fill="#FBFAF7" stroke="#DAD6CC"/>
-    <rect x="24" y="92" width="28" height="20" fill="#1F3A5F" fill-opacity=".15"/>
-    <text x="66" y="107" class="sans" font-size="15" fill="#1B1F24">1, single</text>
-    <rect x="24" y="126" width="28" height="20" fill="#FBFAF7" stroke="#DAD6CC"/>
-    <rect x="24" y="126" width="28" height="20" fill="#1F3A5F" fill-opacity=".28"/>
-    <text x="66" y="141" class="sans" font-size="15" fill="#1B1F24">2 or more, layered</text>
-    <rect x="24" y="160" width="28" height="20" rx="2" fill="#4A5058"/>
-    <text x="66" y="175" class="sans" font-size="15" fill="#1B1F24">obstacle</text>
-    <line x1="24" y1="206" x2="292" y2="206" stroke="#DAD6CC"/>
-    <text x="24" y="236" class="sans" font-size="14" fill="#4A5058">The dashed wedge behind the building</text>
-    <text x="24" y="256" class="sans" font-size="14" fill="#4A5058">is inside S1's range but out of its</text>
-    <text x="24" y="276" class="sans" font-size="14" fill="#4A5058">line of sight. Only S2 recovers part</text>
-    <text x="24" y="296" class="sans" font-size="14" fill="#4A5058">of it. Adding a sensor moves the</text>
-    <text x="24" y="316" class="sans" font-size="14" fill="#4A5058">gaps; it does not remove them.</text>
-    <text x="24" y="356" class="mono" font-size="12" fill="#7A8088">SCHEMATIC, NOT TO SCALE</text>
+    <rect width="316" height="380" rx="6" fill="#fff" stroke="#D8DEE6"/>
+    <rect width="316" height="3" fill="#0B2545"/>
+    <text x="24" y="38" class="mono" font-size="12" letter-spacing="1" fill="#6B7688">COVERAGE COUNT</text>
+    <rect x="24" y="58" width="28" height="20" fill="url(#hatch)" stroke="#8A6A1F" stroke-opacity=".5"/>
+    <text x="66" y="73" class="sans" font-size="15" fill="#0E1726">0, dead zone</text>
+    <rect x="24" y="92" width="28" height="20" fill="#FFFFFF" stroke="#D8DEE6"/>
+    <rect x="24" y="92" width="28" height="20" fill="#0B2545" fill-opacity=".15"/>
+    <text x="66" y="107" class="sans" font-size="15" fill="#0E1726">1, single</text>
+    <rect x="24" y="126" width="28" height="20" fill="#FFFFFF" stroke="#D8DEE6"/>
+    <rect x="24" y="126" width="28" height="20" fill="#0B2545" fill-opacity=".28"/>
+    <text x="66" y="141" class="sans" font-size="15" fill="#0E1726">2 or more, layered</text>
+    <rect x="24" y="160" width="28" height="20" rx="2" fill="#3D4A5C"/>
+    <text x="66" y="175" class="sans" font-size="15" fill="#0E1726">obstacle</text>
+    <line x1="24" y1="206" x2="292" y2="206" stroke="#D8DEE6"/>
+    <text x="24" y="236" class="sans" font-size="14" fill="#3D4A5C">The dashed wedge behind the building</text>
+    <text x="24" y="256" class="sans" font-size="14" fill="#3D4A5C">is inside S1's range but out of its</text>
+    <text x="24" y="276" class="sans" font-size="14" fill="#3D4A5C">line of sight. Only S2 recovers part</text>
+    <text x="24" y="296" class="sans" font-size="14" fill="#3D4A5C">of it. Adding a sensor moves the</text>
+    <text x="24" y="316" class="sans" font-size="14" fill="#3D4A5C">gaps; it does not remove them.</text>
+    <text x="24" y="356" class="mono" font-size="12" fill="#6B7688">SCHEMATIC, NOT TO SCALE</text>
   </g>
 </svg>

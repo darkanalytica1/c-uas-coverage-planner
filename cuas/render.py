@@ -10,18 +10,18 @@ from .coverage import CoverageResult
 
 # Palette: light, restrained. The dead zone is the one thing to notice, so it
 # alone carries the accent colour; coverage levels are graded navy tints.
-BG = (246, 244, 239)
-INK = (27, 31, 36)
-MUTED = (74, 80, 88)
-FRAME = (218, 214, 204)
-OBSTACLE = (74, 80, 88)
+BG = (245, 247, 250)        # page #F5F7FA
+INK = (14, 23, 38)          # ink #0E1726
+MUTED = (61, 74, 92)         # ink-2 #3D4A5C
+FRAME = (216, 222, 230)     # line #D8DEE6
+OBSTACLE = (61, 74, 92)
 # coverage level -> colour
-DEAD = (224, 176, 166)
-L1 = (221, 228, 236)
-L2 = (176, 193, 212)
-L3 = (125, 148, 176)
-SENSOR = (31, 58, 95)
-RANGE_RING = (31, 58, 95)
+DEAD = (214, 196, 150)      # brass #8A6A1F at ~40%
+L1 = (225, 231, 239)        # navy #0B2545 tints
+L2 = (172, 184, 199)
+L3 = (109, 124, 143)
+SENSOR = (11, 37, 69)       # navy #0B2545
+RANGE_RING = (11, 37, 69)
 
 
 def _font(size):

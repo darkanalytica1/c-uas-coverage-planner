@@ -2,7 +2,7 @@
   <title id="t">C-UAS Coverage Planner</title>
   <desc id="d">Two sensors with range rings; a building casts a line-of-sight shadow, and the part of the shadow no other sensor reaches is the dead zone.</desc>
   <style>
-    .serif { font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif; }
+    .display { font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; letter-spacing: -0.01em; }
     .sans  { font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
     .mono  { font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
     .dead  { animation: pulse 6s ease-in-out infinite; }
@@ -23,45 +23,45 @@
       <rect x="870" y="165" width="30" height="30" fill="#000"/>
     </mask>
     <linearGradient id="sweepGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#1F3A5F" stop-opacity="0"/>
-      <stop offset="1" stop-color="#1F3A5F" stop-opacity=".5"/>
+      <stop offset="0" stop-color="#0B2545" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0B2545" stop-opacity=".5"/>
     </linearGradient>
   </defs>
 
-  <rect width="1200" height="400" fill="#F6F4EF"/>
-  <rect x=".5" y=".5" width="1199" height="399" fill="none" stroke="#DAD6CC"/>
+  <rect width="1200" height="400" fill="#F5F7FA"/>
+  <rect x=".5" y=".5" width="1199" height="399" fill="none" stroke="#D8DEE6"/>
 
   <!-- text column -->
-  <text x="64" y="82" class="mono" font-size="12" letter-spacing="1.8" fill="#7A8088">DARKANALYTICA</text>
-  <rect x="64" y="108" width="48" height="3" fill="#1F3A5F"/>
-  <text x="62" y="176" class="serif" font-size="46" font-weight="600" fill="#1B1F24">C-UAS Coverage Planner</text>
-  <text x="64" y="226" class="sans" font-size="19" fill="#4A5058">Place counter-drone sensors, mask line of sight,</text>
-  <text x="64" y="252" class="sans" font-size="19" fill="#4A5058">and measure the dead zones a low, slow drone would use.</text>
-  <text x="64" y="330" class="mono" font-size="12" letter-spacing="1.2" fill="#7A8088">PYTHON  ·  NUMPY  ·  COUNTER-UAS  ·  SITE PLANNING</text>
+  <text x="64" y="82" class="mono" font-size="12" letter-spacing="1.8" fill="#6B7688">DARKANALYTICA</text>
+  <rect x="64" y="108" width="48" height="3" fill="#0B2545"/>
+  <text x="62" y="176" class="display" font-size="46" font-weight="600" fill="#0E1726">C-UAS Coverage Planner</text>
+  <text x="64" y="226" class="sans" font-size="19" fill="#3D4A5C">Place counter-drone sensors, mask line of sight,</text>
+  <text x="64" y="252" class="sans" font-size="19" fill="#3D4A5C">and measure the dead zones a low, slow drone would use.</text>
+  <text x="64" y="330" class="mono" font-size="12" letter-spacing="1.2" fill="#6B7688">PYTHON  ·  NUMPY  ·  COUNTER-UAS  ·  SITE PLANNING</text>
 
-  <line x1="680" y1="56" x2="680" y2="344" stroke="#DAD6CC"/>
+  <line x1="680" y1="56" x2="680" y2="344" stroke="#D8DEE6"/>
 
   <!-- mechanism strip -->
   <g>
-    <circle cx="840" cy="200" r="120" fill="#E8EDF3" stroke="#5B7083" stroke-width="1.5"/>
-    <use href="#shadowA" fill="#F6F4EF"/>
-    <circle cx="1040" cy="215" r="95" fill="#EDF0F3" stroke="#5B7083" stroke-width="1.5" stroke-dasharray="5 4"/>
-    <g mask="url(#deadMask)"><rect class="dead" x="860" y="100" width="110" height="100" fill="#A33A2B" fill-opacity=".5"/></g>
+    <circle cx="840" cy="200" r="120" fill="#EDF1F6" stroke="#3E5C76" stroke-width="1.5"/>
+    <use href="#shadowA" fill="#F5F7FA"/>
+    <circle cx="1040" cy="215" r="95" fill="#EEF2F5" stroke="#3E5C76" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <g mask="url(#deadMask)"><rect class="dead" x="860" y="100" width="110" height="100" fill="#8A6A1F" fill-opacity=".5"/></g>
     <g mask="url(#losMask)">
       <path d="M840,200 L960,200 L957,172 Z" fill="url(#sweepGrad)">
         <animateTransform attributeName="transform" type="rotate" from="0 840 200" to="360 840 200" dur="8s" repeatCount="indefinite"/>
       </path>
     </g>
-    <rect x="870" y="165" width="30" height="30" rx="2" fill="#4A5058"/>
-    <path class="track" d="M712,78 C800,58 900,88 940,140 S1080,280 1160,300" fill="none" stroke="#1B1F24" stroke-width="1.5" stroke-opacity=".5"/>
-    <circle r="4.5" fill="#1B1F24">
+    <rect x="870" y="165" width="30" height="30" rx="2" fill="#3D4A5C"/>
+    <path class="track" d="M712,78 C800,58 900,88 940,140 S1080,280 1160,300" fill="none" stroke="#0E1726" stroke-width="1.5" stroke-opacity=".5"/>
+    <circle r="4.5" fill="#0E1726">
       <animateMotion dur="8s" repeatCount="indefinite" path="M712,78 C800,58 900,88 940,140 S1080,280 1160,300"/>
     </circle>
-    <circle cx="840" cy="200" r="5" fill="#1F3A5F" stroke="#fff" stroke-width="1.5"/>
-    <circle cx="1040" cy="215" r="5" fill="#1F3A5F" stroke="#fff" stroke-width="1.5"/>
-    <text x="800" y="228" class="mono" font-size="12" fill="#1F3A5F">S1 RADAR</text>
-    <text x="1020" y="243" class="mono" font-size="12" fill="#1F3A5F">S2 RF</text>
-    <text x="880" y="96" class="mono" font-size="12" fill="#A33A2B">DEAD ZONE</text>
-    <text x="712" y="352" class="mono" font-size="12" fill="#7A8088">RANGE  ·  FIELD OF VIEW  ·  LINE OF SIGHT</text>
+    <circle cx="840" cy="200" r="5" fill="#0B2545" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="1040" cy="215" r="5" fill="#0B2545" stroke="#fff" stroke-width="1.5"/>
+    <text x="800" y="228" class="mono" font-size="12" fill="#0B2545">S1 RADAR</text>
+    <text x="1020" y="243" class="mono" font-size="12" fill="#0B2545">S2 RF</text>
+    <text x="880" y="96" class="mono" font-size="12" fill="#8A6A1F">DEAD ZONE</text>
+    <text x="712" y="352" class="mono" font-size="12" fill="#6B7688">RANGE  ·  FIELD OF VIEW  ·  LINE OF SIGHT</text>
   </g>
 </svg>
