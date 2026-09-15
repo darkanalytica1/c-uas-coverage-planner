@@ -8,22 +8,27 @@ from PIL import Image, ImageDraw, ImageFont
 
 from .coverage import CoverageResult
 
-BG = (244, 245, 247)
-INK = (20, 27, 38)
-MUTED = (92, 102, 117)
-OBSTACLE = (74, 82, 96)
+# Palette: light, restrained. The dead zone is the one thing to notice, so it
+# alone carries the accent colour; coverage levels are graded navy tints.
+BG = (246, 244, 239)
+INK = (27, 31, 36)
+MUTED = (74, 80, 88)
+FRAME = (218, 214, 204)
+OBSTACLE = (74, 80, 88)
 # coverage level -> colour
-DEAD = (211, 84, 70)
-L1 = (222, 168, 84)
-L2 = (108, 184, 112)
-L3 = (56, 150, 120)
-SENSOR = (34, 40, 54)
-RANGE_RING = (47, 75, 122)
+DEAD = (224, 176, 166)
+L1 = (221, 228, 236)
+L2 = (176, 193, 212)
+L3 = (125, 148, 176)
+SENSOR = (31, 58, 95)
+RANGE_RING = (31, 58, 95)
 
 
 def _font(size):
     for p in ("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
-              "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
+              "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "/System/Library/Fonts/Menlo.ttc",
+              "C:/Windows/Fonts/consola.ttf"):
         try:
             return ImageFont.truetype(p, size)
         except OSError:
@@ -68,20 +73,20 @@ def render(result: CoverageResult, path: str, target_px: int = 820) -> str:
            f"  {len(sc.sensors)} sensors  .  {sc.resolution_m:.0f} m grid",
            font=fs, fill=MUTED)
 
-    # map frame
-    d.rectangle([margin, margin + title_h, margin + map_w, margin + title_h + map_h],
-                outline=(205, 210, 218), width=1)
+    # rings and wedges go on their own layer, clipped to the map frame
+    overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    od = ImageDraw.Draw(overlay)
 
     # obstacles outline + label
     for obs in sc.obstacles:
         pts = [to_px(*v) for v in obs.vertices]
-        d.polygon(pts, outline=(150, 158, 172), width=2)
+        d.polygon(pts, outline=INK, width=1)
 
     # sensors: range ring, FOV wedge, marker, label
     for s in sc.sensors:
         cx, cy = to_px(s.x, s.y)
         rr = s.range_m / sc.resolution_m * cell
-        d.ellipse([cx - rr, cy - rr, cx + rr, cy + rr], outline=RANGE_RING + (150,), width=1)
+        od.ellipse([cx - rr, cy - rr, cx + rr, cy + rr], outline=RANGE_RING + (150,), width=1)
         if not s.omnidirectional:
             # wedge: compass bearing to screen angle (0=N up, clockwise)
             a0 = s.fov_center_deg - s.fov_width_deg / 2
@@ -91,7 +96,18 @@ def render(result: CoverageResult, path: str, target_px: int = 820) -> str:
             for k in range(steps + 1):
                 ang = math.radians(a0 + (a1 - a0) * k / steps)
                 poly.append((cx + rr * math.sin(ang), cy - rr * math.cos(ang)))
-            d.polygon(poly, outline=RANGE_RING + (200,))
+            od.polygon(poly, outline=RANGE_RING + (200,))
+
+    clip = Image.new("L", (W, H), 0)
+    ImageDraw.Draw(clip).rectangle([margin, margin + title_h, margin + map_w, margin + title_h + map_h], fill=255)
+    overlay.putalpha(Image.composite(overlay.getchannel("A"), clip, clip))
+    img.paste(overlay, (0, 0), overlay)
+    d = ImageDraw.Draw(img, "RGBA")
+    d.rectangle([margin, margin + title_h, margin + map_w, margin + title_h + map_h],
+                outline=FRAME, width=1)
+
+    for s in sc.sensors:
+        cx, cy = to_px(s.x, s.y)
         d.ellipse([cx - 5, cy - 5, cx + 5, cy + 5], fill=SENSOR, outline=(255, 255, 255))
         d.text((cx + 8, cy - 16), f"{s.name}", font=fb, fill=INK)
         d.text((cx + 8, cy), f"{s.kind} {s.range_m:.0f}m", font=fs, fill=MUTED)
@@ -104,7 +120,7 @@ def render(result: CoverageResult, path: str, target_px: int = 820) -> str:
              ("Triple+ (3x)", L3), ("Obstacle", OBSTACLE)]
     for i, (label, col) in enumerate(items):
         yy = ly + 26 + i * 24
-        d.rectangle([lx, yy, lx + 16, yy + 16], fill=col, outline=(200, 205, 214))
+        d.rectangle([lx, yy, lx + 16, yy + 16], fill=col, outline=FRAME)
         d.text((lx + 24, yy + 1), label, font=fs, fill=MUTED)
     # north arrow
     ny_ = ly + 26 + len(items) * 24 + 20
